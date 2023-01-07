@@ -11,7 +11,7 @@ import { JwtStrategy } from './strategy/jwt.strategy';
 @Module({
   imports: [
     JwtModule.register({
-      secret: config.get('jwt.secret') ?? String(process.env),
+      secret: config.get('jwt.secret') ?? String(process.env.JWT_SECRET),
       signOptions: { issuer: 'https://vegan.kyojs.com' },
     }),
     PassportModule,
