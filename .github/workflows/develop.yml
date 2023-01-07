@@ -36,7 +36,7 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           port: ${{ secrets.SERVER_PORT }}
           script: |
-            cd ~/vegan-server
+            cd ~/vegan-api-server
             docker stop dev-vegan-api-server
             docker build -t dev-vegan-api-server .
             docker run -d --name dev-api-vegan-server --restart=always -p 3200:3200 dev-vegan-api-server
