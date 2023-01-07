@@ -3,7 +3,6 @@ import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { getConnectionOptions } from 'typeorm';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
@@ -21,11 +20,21 @@ import { UserModule } from './user/user.module';
       context: ({ req }) => ({ req }),
     }),
     TypeOrmModule.forRootAsync({
-      useFactory: async () =>
-        Object.assign(await getConnectionOptions(), {
-          entities: [__dirname + '/**/*.entity{.ts,.js}'],
-          migrations: [__dirname + '/migration/*.{ts,js}'],
-        }),
+      useFactory: async () => ({
+        type: 'mysql',
+        host: process.env.DB_HOST,
+        port: Number(process.env.DB_PORT),
+        username: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        entities: [__dirname + '/**/*.entity{.ts,.js}'],
+        migrations: [__dirname + '/migration/*.{ts,js}'],
+        migrationsRun: true,
+        cli: { migrationsDir: 'src/migration' },
+        logging: ['schema', 'warn', 'error', 'query'],
+        logger: 'advanced-console',
+        synchronize: false,
+      }),
     }),
     AuthModule,
     UserModule,
