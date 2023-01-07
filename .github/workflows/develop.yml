@@ -38,6 +38,7 @@ jobs:
           script: |
             cd ~/vegan-api-server
             docker stop dev-vegan-api-server
+            docker rm dev-vegan-api-server
             docker build -t dev-vegan-api-server .
             docker run -d --name dev-api-vegan-server --restart=always -p 3200:3200 dev-vegan-api-server
             docker cp ~/vegan-api-server/config/local.js dev-vegan-api-server:/var/www/html/config/local.js
