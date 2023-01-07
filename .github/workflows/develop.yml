@@ -37,6 +37,8 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             cd ~/vegan-api-server
+            git checkout develop
+            git pull origin develop
             docker stop dev-vegan-api-server
             docker rm dev-vegan-api-server
             docker build -t dev-vegan-api-server .
