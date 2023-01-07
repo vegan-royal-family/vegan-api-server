@@ -68,10 +68,9 @@ jobs:
           port: ${{ secrets.SERVER_PORT }}
           script: |
             cd ~/vegan-server
-            cat ~/docker_password.txt | docker login --username ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/vegan-server:develop
-            docker stop dev-vegan-server
-            docker rm dev-vegan-server
-            docker run -d --name dev-vegan-server --restart=always -p 3200:3200 ${{ secrets.DOCKERHUB_USERNAME }}/vegan-server:develop
-            docker cp ~/vegan-server/local.js dev-vegan-server:/var/www/html/config/local.js
-            docker cp ~/vegan-server/ormconfig.json dev-vegan-server:/var/www/html/ormconfig.json
+            docker stop dev-vegan-api-server
+            docker rm dev-vegan-api-server
+            docker build -t dev-vegan-api-server ~/vegan-api-server/
+            docker run -d --name dev-api-vegan-server --restart=always -p 3200:3200 dev-vegan-api-server
+            docker cp ~/vegan-api-server/local.js dev-vegan-api-server:/var/www/html/config/local.js
+            docker cp ~/vegan-api-server/ormconfig.json dev-vegan-api-server:/var/www/html/ormconfig.json
