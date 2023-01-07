@@ -7,7 +7,7 @@ ENV TZ="Asia/Seoul"
 WORKDIR /var/www/html
 COPY . /var/www/html
 
-RUN yanrn install --frozen-lockfile
+RUN yarn install --frozen-lockfile
 RUN yarn build
 
 ENV HOST 0.0.0.0
