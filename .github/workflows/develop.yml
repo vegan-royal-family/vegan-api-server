@@ -70,7 +70,7 @@ jobs:
             cd ~/vegan-server
             docker stop dev-vegan-api-server
             docker rm dev-vegan-api-server
-            docker build -t dev-vegan-api-server ~/vegan-api-server/
+            docker build -t dev-vegan-api-server .
             docker run -d --name dev-api-vegan-server --restart=always -p 3200:3200 dev-vegan-api-server
             docker cp ~/vegan-api-server/local.js dev-vegan-api-server:/var/www/html/config/local.js
             docker cp ~/vegan-api-server/ormconfig.json dev-vegan-api-server:/var/www/html/ormconfig.json
