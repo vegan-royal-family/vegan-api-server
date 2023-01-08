@@ -17,6 +17,12 @@ spec:
         - name: api-service-dev
           image: harbor.kyojs.com/vegan/api-server-dev:develop
           imagePullPolicy: Always
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3200
+            initialDelaySeconds: 3
+            periodSeconds: 3
           resources:
             limits:
               cpu: 500m
@@ -27,6 +33,7 @@ spec:
           envFrom:
             - secretRef:
                 name: api-server-dev
+
 ---
 apiVersion: autoscaling/v2beta1
 kind: HorizontalPodAutoscaler
