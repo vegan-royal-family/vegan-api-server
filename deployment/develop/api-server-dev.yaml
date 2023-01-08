@@ -4,7 +4,7 @@ metadata:
   name: api-service-dev
   namespace: vegan
 spec:
-  replicas: 2
+  replicas: 3
   revisionHistoryLimit: 0
   selector:
     matchLabels:
@@ -56,7 +56,7 @@ metadata:
   namespace: vegan
 spec:
   maxReplicas: 6
-  minReplicas: 2
+  minReplicas: 3
   metrics:
     - resource:
         name: cpu
