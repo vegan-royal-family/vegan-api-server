@@ -49,18 +49,18 @@ jobs:
           IMAGE_TAG: ${{ steps.image.outputs.version }}
 
       - name: Checkout vegan-infra repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           # kubernetes 설정정보 저장소
           repository: vegan-royal-family/vegan-infra
           ref: main
           # 다른 저장소에 push 하려면 Personal Access Token이 필요.
           token: ${{ secrets.ACTION_TOKEN }}
-          path: api-server
       # 새 이미지 버전으로 파일 수정
       - name: Update Kubernetes resources
         run: |
           echo "$PWD"
+          git pull origin main
           perl -i -pe's/image: harbor.kyojs.com\/vegan\/api-server-dev:.*/image: harbor.kyojs.com\/vegan\/api-server-dev:${{ steps.image.outputs.version }}/' api-server/api-server-dev.yaml
           cat api-server/api-server-dev.yaml
 
