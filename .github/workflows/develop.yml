@@ -47,3 +47,28 @@ jobs:
           DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
           DOCKER_REPOSITORY: vegan/api-server-dev
           IMAGE_TAG: ${{ steps.image.outputs.version }}
+
+      - name: Checkout vegan-infra repository
+        uses: actions/checkout@v2
+        with:
+          # kubernetes 설정정보 저장소
+          repository: vegan-royal-family/vegan-infra
+          ref: dev
+          # 다른 저장소에 push 하려면 Personal Access Token이 필요.
+          token: ${{ secrets.ACTION_TOKEN }}
+          path: api-server
+      # 새 이미지 버전으로 파일 수정
+      - name: Update Kubernetes resources
+        run: |
+          cd api-server
+          yq -y '.spec.template.spec.containers[0].image = "${{ env.IMAGE_NAME }}:${{ steps.image.outputs.version }}"' api-server-dev.yaml
+          cat api-server-dev.yaml
+
+      # 수정된 파일 commit & push
+      - name: Commit files
+        run: |
+          cd api-server
+          git config --global user.email "github-actions@github.com"
+          git config --global user.name "github-actions"
+          git commit -am "Update image tag"
+          git push -u origin main
