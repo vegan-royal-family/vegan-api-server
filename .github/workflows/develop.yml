@@ -61,7 +61,7 @@ jobs:
       - name: Update Kubernetes resources
         run: |
           cd api-server
-          yq -y '.spec.template.spec.containers[0].image = "${{ env.IMAGE_NAME }}:${{ steps.image.outputs.version }}"' api-server-dev.yaml
+          perl -i -pe's/image: harbor.kyojs.com\/vegan\/api-server-dev:.*/image: harbor.kyojs.com\/vegan\/api-server-dev:${{ steps.image.outputs.version }}/' api-server-dev.yaml
           cat api-server-dev.yaml
 
       # 수정된 파일 commit & push
