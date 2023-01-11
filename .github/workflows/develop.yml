@@ -11,6 +11,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Get verion
+        id: image
+        run: |
+          VERSION=$(echo ${{ github.sha }} | cut -c1-8)
+          echo VERSION=$VERSION
+          echo "::set-output name=version::$VERSION"
+
       - name: Checkout
         uses: actions/checkout@v2
 
@@ -39,4 +46,4 @@ jobs:
         env:
           DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
           DOCKER_REPOSITORY: vegan/api-server-dev
-          IMAGE_TAG: ${{ steps.docker_meta.outputs.tags }}
+          IMAGE_TAG: ${{ steps.image.outputs.version }}
