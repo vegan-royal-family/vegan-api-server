@@ -39,7 +39,7 @@ jobs:
         env:
           DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
           DOCKER_REPOSITORY: vegan/api-server-dev
-          IMAGE_TAG: develop
+          IMAGE_TAG: $IMAGE_TAG
 
       - name: Deploy vegan api server
         uses: appleboy/ssh-action@master
