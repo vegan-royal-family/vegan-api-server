@@ -60,6 +60,7 @@ jobs:
       # 새 이미지 버전으로 파일 수정
       - name: Update Kubernetes resources
         run: |
+          git config pull.rebase false
           git pull origin main
           perl -i -pe's/image: harbor.kyojs.com\/vegan\/api-server-dev:.*/image: harbor.kyojs.com\/vegan\/api-server-dev:${{ steps.image.outputs.version }}/' api-server-dev.yaml
 
