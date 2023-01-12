@@ -60,14 +60,9 @@ jobs:
       - name: Update Kubernetes resources
         run: |
           perl -i -pe's/image: $DOCKER_REGISTRY\/vegan\/api-server-dev:.*/image: $DOCKER_REGISTRY\/vegan\/api-server-dev:${{ steps.image.outputs.version }}/' api-server/api-server-dev.yaml
-        env:
-          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
-
-      # 수정된 파일 commit & push
-      - name: Commit files
-        run: |
-          cd api-server
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
           git commit -am "Update image tag"
           git push -u origin main
+        env:
+          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
