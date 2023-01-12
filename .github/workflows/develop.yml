@@ -60,6 +60,7 @@ jobs:
       - name: Update Kubernetes resources
         run: |
           perl -i -pe's/image: harbor.kyojs.com\/vegan\/api-server-dev:.*/image: harbor.kyojs.com\/vegan\/api-server-dev:${{ steps.image.outputs.version }}/' api-server/api-server-dev.yaml
+          echo "hello"
 
       # 수정된 파일 commit & push
       - name: Commit files
