@@ -59,10 +59,8 @@ jobs:
       # 새 이미지 버전으로 파일 수정
       - name: Update Kubernetes resources
         run: |
-          perl -i -pe's/image: $DOCKER_REGISTRY\/vegan\/api-server-dev:.*/image: $DOCKER_REGISTRY\/vegan\/api-server-dev:${{ steps.image.outputs.version }}/' api-server/api-server-dev.yaml
+          perl -i -pe's/image: harbor.kyojs.com\/vegan\/api-server-dev:.*/image: harbor.kyojs.com\/vegan\/api-server-dev:${{ steps.image.outputs.version }}/' api-server/api-server-dev.yaml
           git config --global user.email "github-actions@github.com"
           git config --global user.name "github-actions"
           git commit -am "Update image tag"
           git push -u origin main
-        env:
-          DOCKER_REGISTRY: ${{ secrets.DOCKER_REGISTRY }}
