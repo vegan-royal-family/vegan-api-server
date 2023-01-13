@@ -75,7 +75,7 @@ jobs:
         if: success()
         with:
           severity: info
-          details: Test Succeeded!
+          details: Github Action Succeeded!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Test Failure
@@ -83,7 +83,7 @@ jobs:
         if: failure()
         with:
           severity: error
-          details: Test Failed!
+          details: Github Action Failed!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
 
       - name: Test Cancelled
@@ -91,5 +91,5 @@ jobs:
         if: cancelled()
         with:
           severity: warn
-          details: Test Cancelled!
+          details: Github Action Cancelled!
           webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
