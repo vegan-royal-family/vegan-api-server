@@ -7,23 +7,19 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
+import { CategoryModule } from './category/category.module';
 import { isProd } from './common/constant';
 import { TypeORMExceptionFilter } from './common/filter/typeorm-exception.filter';
-import { UserModule } from './user/user.module';
-import { RestaurantModule } from './restaurant/restaurant.module';
-import { RecipeModule } from './recipe-step/recipe/recipe.module';
-import { RecipeModule } from './recipe/recipe.module';
-import { LikeModule } from './like/like.module';
-import { VeganTypeModule } from './vegan-type/vegan-type.module';
-import { RecipeStepModule } from './recipe-step/recipe-step.module';
-import { VisitModule } from './visit/visit.module';
 import { FileModule } from './file/file.module';
-import { ReviewModule } from './review/review.module';
 import { FoodModule } from './food/food.module';
+import { LikeModule } from './like/like.module';
 import { MenuModule } from './menu/menu.module';
-import { CategoryModule } from './category/category.module';
+import { RecipeModule } from './recipe/recipe.module';
+import { RestaurantModule } from './restaurant/restaurant.module';
+import { ReviewModule } from './review/review.module';
+import { UserModule } from './user/user.module';
 import { VeganTypeModule } from './vegan-type/vegan-type.module';
-import { RecipeStepModule } from './recipe-step/recipe-step.module';
+import { VisitModule } from './visit/visit.module';
 
 @Module({
   imports: [
@@ -56,7 +52,6 @@ import { RecipeStepModule } from './recipe-step/recipe-step.module';
     RecipeModule,
     LikeModule,
     VeganTypeModule,
-    RecipeStepModule,
     CategoryModule,
     MenuModule,
     FoodModule,
