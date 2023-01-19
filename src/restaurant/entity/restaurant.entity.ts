@@ -50,11 +50,11 @@ export class Restaurant {
   star: number;
 
   @Field({ description: '위도', nullable: true })
-  @Column('double', { unsigned: true, precision: 22 })
+  @Column('double', { unsigned: true, nullable: true })
   latitude?: number;
 
   @Field({ description: '경도', nullable: true })
-  @Column('double', { unsigned: true, precision: 22 })
+  @Column('double', { unsigned: true, nullable: true })
   longitude?: number;
 
   @Field(() => Int, { description: '작성된 리뷰 개수' })
