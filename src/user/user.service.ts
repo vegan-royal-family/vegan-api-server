@@ -18,7 +18,7 @@ export class UserService {
   }
 
   async getUserForLogin(email: string) {
-    return this.userRepository.getUserForLogin(email);
+    return this.userRepository.getUserForLogins(email);
   }
 
   async addUser(args: IAddUser) {
