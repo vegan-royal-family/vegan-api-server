@@ -1,6 +1,8 @@
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
+import { LikeTarget } from '../enum/like.enum';
+
 @ObjectType()
 @Entity()
 export class Like {
@@ -12,9 +14,9 @@ export class Like {
   @Column('bigint')
   userId: number;
 
-  @Field(() => String, { description: '방문 타겟' })
-  @Column({ type: 'enum', enum: String })
-  target: string;
+  @Field(() => LikeTarget, { description: '방문 타겟' })
+  @Column({ type: 'enum', enum: LikeTarget })
+  target: LikeTarget;
 
   @Field({ description: '타겟 ID' })
   @Column('varchar', { length: 50 })

@@ -9,6 +9,8 @@ import {
   UpdateDateColumn
 } from 'typeorm';
 
+import { FileTarget } from '../enum/file.enum';
+
 @ObjectType()
 @Index('target', ['targetId', 'target', 'sequence'])
 @Entity()
@@ -17,9 +19,9 @@ export class File {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field(() => String, { description: '타겟' })
-  @Column({ type: 'enum', enum: String })
-  target: string;
+  @Field(() => FileTarget, { description: '타겟' })
+  @Column({ type: 'enum', enum: FileTarget })
+  target: FileTarget;
 
   @Field({ description: '타겟 ID, -로 시작하는 경우 일정시간 이상 지난 후 삭제' })
   @Column('varchar', { length: 50 })
