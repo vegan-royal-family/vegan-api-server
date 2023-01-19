@@ -67,10 +67,10 @@ module.exports = {
     //     ignoreRestSiblings: true,
     //   },
     // ],
-    'padding-line-between-statements': [
-      'error',
-      { blankLine: 'always', prev: 'block-like', next: '*' },
-    ],
+    // 'padding-line-between-statements': [
+    //   'error',
+    //   { blankLine: 'always', prev: 'block-like', next: '*' },
+    // ],
   },
   overrides: [
     {
