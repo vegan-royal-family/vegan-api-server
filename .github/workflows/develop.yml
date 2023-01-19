@@ -21,14 +21,22 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cache node modules
-        uses: actions/cache@v2
+      - name: Cache yarn dependencies
+        uses: actions/cache@v1
+        id: yarn-cache
         with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
+          path: '**/node_modules'
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install packages
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn install
+
+      - name: Run linter
+        run: yarn lint
+
+      - name: Run unit tests
+        run: yarn test:cov
 
       - name: Docker private registry setting
         run: |
