@@ -46,7 +46,7 @@ export class Restaurant {
   url: string;
 
   @Field({ description: '별점' })
-  @Column('double', { unsigned: true, precision: 22, default: 0 })
+  @Column('double', { unsigned: true, default: 0 })
   star: number;
 
   @Field({ description: '위도', nullable: true })
