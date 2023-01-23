@@ -1,6 +1,7 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum FileTarget {
-  DEFAULT = 'default',
+  REVIEW = 'review',
+  RECIPE = 'recipe',
 }
-registerEnumType(FileTarget, { name: 'FileTarget', description: 'file target' });
+registerEnumType(FileTarget, { name: 'FileTarget', description: 'FileTarget' });
