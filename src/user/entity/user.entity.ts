@@ -6,10 +6,11 @@ import {
   DeleteDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
 
 import { Role } from '../../common/enum';
+import { VeganLevel } from '../enum/vegan-level.enum';
 
 @ObjectType()
 @Entity()
@@ -36,6 +37,10 @@ export class User {
   @Field(() => GraphQLJSON, { description: '비건 실천 이유' })
   @Column({ type: 'json' })
   veganFor: number[];
+
+  @Field(() => VeganLevel, { description: '비건 실천 정도' })
+  @Column({ type: 'enum', enum: VeganLevel })
+  veganLevel: VeganLevel;
 
   @Field(() => Int, { description: '비건 타입 ID' })
   @Column('bigint')
