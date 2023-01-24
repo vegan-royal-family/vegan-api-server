@@ -1,5 +1,7 @@
+import { InjectRedis } from '@liaoliaots/nestjs-redis';
 import { UnauthorizedException } from '@nestjs/common';
-import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import Redis from 'ioredis';
 
 import { RequestInfo, Roles } from '../common/decorator';
 import { Role } from '../common/enum';
@@ -9,7 +11,10 @@ import { LoginArgs, SignupArgs, SignupOutput, TokenOutput } from './dto';
 
 @Resolver()
 export class AuthResolver {
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    @InjectRedis() private readonly redis: Redis,
+  ) {}
 
   @Mutation(() => TokenOutput)
   async login(@Args() loginArg: LoginArgs) {
@@ -29,5 +34,20 @@ export class AuthResolver {
   @Mutation(() => SignupOutput)
   async signup(@Args() args: SignupArgs) {
     return this.authService.signup(args);
+  }
+
+  @Query(() => String)
+  async redisGetHello(): Promise<string> {
+    const test = await this.redis.get('test');
+    if (test) {
+      return 'ok ' + test;
+    }
+    return 'no' + test;
+  }
+
+  @Query(() => Boolean)
+  async redisSetHello() {
+    await this.redis.set('test', 'hello');
+    return true;
   }
 }
