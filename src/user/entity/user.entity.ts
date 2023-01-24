@@ -5,11 +5,19 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import { Gender, Role } from '../../common/enum';
+import { Like } from '../../like/entity/like.entity';
+import { Recipe } from '../../recipe/entity';
+import { Review } from '../../review/entity/review.entity';
+import { VeganType } from '../../vegan-type/entity';
+import { Visit } from '../../visit/entity/visit.entity';
 import { VeganLevel } from '../enum';
 
 @ObjectType()
@@ -86,4 +94,20 @@ export class User {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Review, (entity) => entity.user)
+  reviews: Review[];
+
+  @OneToMany(() => Like, (entity) => entity.user)
+  likes: Like[];
+
+  @OneToMany(() => Visit, (entity) => entity.user)
+  visits: Visit[];
+
+  @OneToMany(() => Recipe, (entity) => entity.user)
+  recipes: Recipe[];
+
+  @ManyToOne(() => VeganType, (entity) => entity.users, { createForeignKeyConstraints: false })
+  @JoinColumn({ name: 'veganTypeId' })
+  veganType: VeganType;
 }

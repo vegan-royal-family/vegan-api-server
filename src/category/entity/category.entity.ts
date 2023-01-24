@@ -4,8 +4,12 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  PrimaryGeneratedColumn
+  OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { Recipe } from '../../recipe/entity';
+import { Restaurant } from '../../restaurant/entity';
 
 @ObjectType()
 @Entity()
@@ -23,4 +27,10 @@ export class Category {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Recipe, (entity) => entity.category)
+  recipes: Recipe[];
+
+  @OneToMany(() => Restaurant, (entity) => entity.category)
+  restaurant: Restaurant[];
 }

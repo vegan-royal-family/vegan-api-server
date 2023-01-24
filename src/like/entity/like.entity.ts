@@ -1,6 +1,14 @@
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
+import { User } from '../../user/entity';
 import { LikeTarget } from '../enum/like.enum';
 
 @ObjectType()
@@ -10,7 +18,7 @@ export class Like {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field(() => Int, { description: '방문자 ID' })
+  @Field(() => Int, { description: 'Liker ID' })
   @Column('bigint')
   userId: number;
 
@@ -24,4 +32,8 @@ export class Like {
 
   @CreateDateColumn()
   createdAt: Date;
+
+  @ManyToOne(() => User, (entity) => entity.likes, { createForeignKeyConstraints: false })
+  @JoinColumn({ name: 'userId' })
+  user: User;
 }

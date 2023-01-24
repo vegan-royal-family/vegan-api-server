@@ -5,9 +5,18 @@ import {
   DeleteDateColumn,
   Entity,
   Index,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
+
+import { Category } from '../../category/entity';
+import { Menu } from '../../menu/entity';
+import { Review } from '../../review/entity/review.entity';
+import { VeganType } from '../../vegan-type/entity';
+import { Visit } from '../../visit/entity/visit.entity';
 
 @ObjectType()
 @Entity()
@@ -78,4 +87,23 @@ export class Restaurant {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Menu, (entity) => entity.restaurant)
+  menus: Menu[];
+
+  @OneToMany(() => Visit, (entity) => entity.restaurant)
+  visits: Visit[];
+
+  @OneToMany(() => Review, (entity) => entity.restaurant, { createForeignKeyConstraints: false })
+  reviews: Review[];
+
+  @ManyToOne(() => Category, (entity) => entity.recipes, { createForeignKeyConstraints: false })
+  @JoinColumn({ name: 'categoryId' })
+  category: Category;
+
+  @ManyToOne(() => VeganType, (entity) => entity.restaurants, {
+    createForeignKeyConstraints: false,
+  })
+  @JoinColumn({ name: 'veganTypeId' })
+  veganType: VeganType;
 }

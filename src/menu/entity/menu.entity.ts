@@ -3,9 +3,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
+
+import { Restaurant } from '../../restaurant/entity';
 
 @ObjectType()
 @Entity()
@@ -31,4 +35,8 @@ export class Menu {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  @ManyToOne(() => Restaurant, (entity) => entity.menus, { createForeignKeyConstraints: false })
+  @JoinColumn({ name: 'restaurantId' })
+  restaurant: Restaurant;
 }

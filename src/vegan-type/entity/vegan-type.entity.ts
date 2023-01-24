@@ -4,8 +4,13 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  PrimaryGeneratedColumn
+  OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
+
+import { Recipe } from '../../recipe/entity';
+import { Restaurant } from '../../restaurant/entity';
+import { User } from '../../user/entity';
 
 @ObjectType()
 @Entity()
@@ -23,4 +28,13 @@ export class VeganType {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Recipe, (entity) => entity.veganType)
+  recipes: Recipe[];
+
+  @OneToMany(() => User, (entity) => entity.veganType)
+  users: User[];
+
+  @OneToMany(() => Restaurant, (entity) => entity.veganType)
+  restaurants: Restaurant[];
 }

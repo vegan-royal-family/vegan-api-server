@@ -5,9 +5,16 @@ import {
   DeleteDateColumn,
   Entity,
   Index,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
+
+import { Restaurant } from '../../restaurant/entity';
+import { User } from '../../user/entity';
+import { Visit } from '../../visit/entity/visit.entity';
 
 @ObjectType()
 @Entity()
@@ -18,11 +25,11 @@ export class Review {
 
   @Field(() => Int, { description: '식당 ID' })
   @Column('bigint')
-  categoryId: number;
+  restaurantId: number;
 
   @Field(() => Int, { description: '작성자 ID' })
   @Column('bigint')
-  userId: number;
+  authorId: number;
 
   @Field(() => Int, { description: '방문 인증 ID' })
   @Column('bigint')
@@ -49,4 +56,16 @@ export class Review {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @ManyToOne(() => User, (entity) => entity.reviews, { createForeignKeyConstraints: false })
+  @JoinColumn({ name: 'authorId' })
+  user: User;
+
+  @ManyToOne(() => Restaurant, (entity) => entity.reviews, { createForeignKeyConstraints: false })
+  @JoinColumn({ name: 'restaurantId' })
+  restaurant: Restaurant;
+
+  @OneToOne(() => Visit, (entity) => entity.review, { createForeignKeyConstraints: false })
+  @JoinColumn({ name: 'visitId' })
+  visit: Visit;
 }
