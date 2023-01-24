@@ -1,6 +1,7 @@
 import { InjectRedis } from '@liaoliaots/nestjs-redis';
 import { UnauthorizedException } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Mutation, Resolver } from '@nestjs/graphql';
+import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
 import Redis from 'ioredis';
 
 import { RequestInfo, Roles } from '../common/decorator';
@@ -14,6 +15,7 @@ export class AuthResolver {
   constructor(
     private readonly authService: AuthService,
     @InjectRedis() private readonly redis: Redis,
+    @InjectSentry() private readonly sentry: SentryService,
   ) {}
 
   @Mutation(() => TokenOutput)
@@ -34,20 +36,5 @@ export class AuthResolver {
   @Mutation(() => SignupOutput)
   async signup(@Args() args: SignupArgs) {
     return this.authService.signup(args);
-  }
-
-  @Query(() => String)
-  async redisGetHello(): Promise<string> {
-    const test = await this.redis.get('test');
-    if (test) {
-      return 'ok ' + test;
-    }
-    return 'no' + test;
-  }
-
-  @Query(() => Boolean)
-  async redisSetHello() {
-    await this.redis.set('test', 'hello');
-    return true;
   }
 }

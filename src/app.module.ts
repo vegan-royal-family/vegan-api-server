@@ -5,12 +5,14 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { SentryModule } from '@ntegral/nestjs-sentry';
+import { LogLevel } from '@sentry/types';
 import * as config from 'config';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
-import { isProd } from './common/constant';
+import { env, isProd } from './common/constant';
 import { TypeORMExceptionFilter } from './common/filter/typeorm-exception.filter';
 import { FileModule } from './file/file.module';
 import { FoodModule } from './food/food.module';
@@ -25,7 +27,14 @@ import { VisitModule } from './visit/visit.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: `${process.env.NODE_ENV}.env` }),
+    ConfigModule.forRoot({ isGlobal: true }),
+    SentryModule.forRoot({
+      enabled: true, //isProd || isDev,
+      dsn: config.get('sentry.dsn'),
+      debug: !isProd,
+      environment: env,
+      logLevel: LogLevel.Error,
+    }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       debug: !isProd,

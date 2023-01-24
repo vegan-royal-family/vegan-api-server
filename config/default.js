@@ -15,4 +15,7 @@ module.exports = {
   jwt: {
     secret: process.env.JWT_SECRET || '',
   },
+  sentry: {
+    dsn: 'https://adc6e50d23834a4ebbb35fdaeab18383@o4504560440508416.ingest.sentry.io/4504560465805312',
+  },
 };
