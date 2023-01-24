@@ -28,6 +28,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@liaoliaots/nestjs-redis": "^8.2.2",
     "@nestjs/apollo": "^10.0.14",
     "@nestjs/common": "^8.4.4",
     "@nestjs/config": "^2.2.0",
@@ -43,7 +44,7 @@
     "aws-sdk": "^2.1193.0",
     "axios": "^0.21.4",
     "bcrypt": "^5.0.1",
-    "cache-manager": "^3.4.4",
+    "cache-manager": "^4.0.1",
     "cache-manager-ioredis": "^2.1.0",
     "class-transformer": "^0.5.1",
     "class-validator": "^0.13.2",
@@ -53,7 +54,7 @@
     "graphql": "^15.8.0",
     "graphql-type-json": "^0.3.2",
     "helmet": "^5.0.2",
-    "ioredis": "^4.28.3",
+    "ioredis": "^5.2.4",
     "mysql2": "^2.3.0",
     "passport": "^0.5.0",
     "passport-jwt": "^4.0.0",

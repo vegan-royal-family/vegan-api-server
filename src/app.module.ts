@@ -1,9 +1,11 @@
+import { RedisModule } from '@liaoliaots/nestjs-redis';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER } from '@nestjs/core';
 import { GraphQLModule } from '@nestjs/graphql';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import * as config from 'config';
 
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
@@ -33,11 +35,11 @@ import { VisitModule } from './visit/visit.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: process.env.DB_HOST,
-      port: Number(process.env.DB_PORT),
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      host: config.get('db.host'),
+      port: config.get('db.port'),
+      username: config.get('db.username'),
+      password: config.get('db.password'),
+      database: config.get('db.database'),
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       migrations: [__dirname + '/migration/*.{ts,js}'],
       migrationsRun: true,
@@ -45,6 +47,13 @@ import { VisitModule } from './visit/visit.module';
       logging: ['schema', 'warn', 'error', 'query'],
       logger: 'advanced-console',
       synchronize: false,
+    }),
+    RedisModule.forRoot({
+      config: {
+        host: config.get('redis.host'),
+        port: config.get('redis.port'),
+        keyPrefix: 'cache:',
+      },
     }),
     AuthModule,
     UserModule,
@@ -67,4 +76,4 @@ import { VisitModule } from './visit/visit.module';
     },
   ],
 })
-export class AppModule { }
+export class AppModule {}
