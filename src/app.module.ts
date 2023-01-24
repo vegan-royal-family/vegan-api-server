@@ -52,6 +52,7 @@ import { VisitModule } from './visit/visit.module';
       config: {
         host: config.get('redis.host'),
         port: config.get('redis.port'),
+        password: config.get('redis.password'),
         keyPrefix: 'cache:',
       },
     }),
