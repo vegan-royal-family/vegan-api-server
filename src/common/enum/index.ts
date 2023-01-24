@@ -1,1 +1,2 @@
-export * from './role';
+export * from './gender.enum';
+export * from './role.enum';

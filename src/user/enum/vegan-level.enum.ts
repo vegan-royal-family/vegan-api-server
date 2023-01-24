@@ -5,4 +5,4 @@ export enum VeganLevel {
   PREFERABLY = 'preferably',
   INTEREST = 'interest',
 }
-registerEnumType(VeganLevel, { name: 'VeganLevel', description: 'VeganLevel' });
+registerEnumType(VeganLevel, { name: 'VeganLevel', description: '비건 레벨' });

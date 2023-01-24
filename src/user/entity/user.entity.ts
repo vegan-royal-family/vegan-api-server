@@ -9,8 +9,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import { Role } from '../../common/enum';
-import { VeganLevel } from '../enum/vegan-level.enum';
+import { Gender, Role } from '../../common/enum';
+import { VeganLevel } from '../enum';
 
 @ObjectType()
 @Entity()
@@ -26,13 +26,21 @@ export class User {
   @Column({ length: 255, select: false })
   password: string;
 
+  @Field({ description: '닉네임' })
+  @Column({ length: 20 })
+  nickname: string;
+
   @Field(() => Role, { description: '역할' })
   @Column({ type: 'enum', default: Role.USER, enum: Role })
   role: Role;
 
-  @Field({ description: '닉네임' })
-  @Column({ length: 20 })
-  nickname: string;
+  @Field(() => Gender, { description: '성별' })
+  @Column({ type: 'enum', enum: Gender })
+  gender: Gender;
+
+  @Field({ description: '생년월일' })
+  @Column({ length: 8 })
+  birth: string;
 
   @Field(() => GraphQLJSON, { description: '비건 실천 이유' })
   @Column({ type: 'json' })
