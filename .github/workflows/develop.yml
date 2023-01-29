@@ -19,16 +19,6 @@ jobs:
         with:
           node-version: '14'
 
-      - name: Get verion
-        id: image
-        run: |
-          VERSION=$(echo ${{ github.sha }} | cut -c1-8)
-          echo VERSION=$VERSION
-          echo "::set-output name=version::$VERSION"
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -38,9 +28,15 @@ jobs:
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
 
-      - name: Install packages
-        if: steps.yarn-cache.outputs.cache-hit != 'true'
-        run: yarn install --frozen-lockfile
+      - name: Get verion
+        id: image
+        run: |
+          VERSION=$(echo ${{ github.sha }} | cut -c1-8)
+          echo VERSION=$VERSION
+          echo "::set-output name=version::$VERSION"
+
+      - run: |
+          yarn install --frozen-lockfile
 
       - name: Run unit tests
         run: yarn test:cov
