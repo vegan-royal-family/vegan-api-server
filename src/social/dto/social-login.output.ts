@@ -5,6 +5,6 @@ import { LoginType } from '../enum';
 
 @ObjectType()
 export class SocialLoginOutput extends TokenOutput {
-  @Field()
+  @Field(() => LoginType)
   type: LoginType;
 }
