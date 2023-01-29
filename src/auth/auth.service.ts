@@ -8,12 +8,13 @@ import * as request from '../common/interface/request';
 import { IAddUser } from '../user/interface/add-user.interface';
 import { UserService } from '../user/user.service';
 import { LoginArgs, TokenOutput } from './dto';
+import { IJwtToken } from './interface/jwt-token.interface';
 
 @Injectable()
 export class AuthService {
   constructor(private readonly jwtService: JwtService, private readonly userService: UserService) {}
 
-  signJsonWebToken(userId: number, role: Role) {
+  signJsonWebToken(userId: number, role: Role): IJwtToken {
     const accessToken = this.jwtService.sign({ _id: userId, _role: role }, { expiresIn: '10m' });
     const refreshToken = this.jwtService.sign(
       { _id: userId, _role: role, _refresh: true },
@@ -31,7 +32,7 @@ export class AuthService {
 
     const validateResult = await bcrypt.compare(loginArgs.password, user.password);
     if (!validateResult) {
-      throw Exceptions.invalidPasswordError;
+      throw Exceptions.invalidPassword;
     }
 
     return this.signJsonWebToken(user.id, user.role);
@@ -44,7 +45,7 @@ export class AuthService {
   async signup(args: IAddUser) {
     const existsUser = await this.userService.getUserByEmail(args.email);
     if (existsUser) {
-      throw Exceptions.emailAlreadyExistsError;
+      throw Exceptions.alreadyExistUserEmail;
     }
 
     const user = await this.userService.addUser(args);

@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
-import { VisitService } from './visit.service';
+
 import { VisitResolver } from './visit.resolver';
+import { VisitService } from './visit.service';
 
 @Module({
-  providers: [VisitResolver, VisitService]
+  providers: [VisitResolver, VisitService],
 })
 export class VisitModule {}

@@ -6,4 +6,4 @@ import { RecipeService } from './recipe.service';
 @Module({
   providers: [RecipeResolver, RecipeService],
 })
-export class RecipeModule { }
+export class RecipeModule {}

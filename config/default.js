@@ -15,6 +15,20 @@ module.exports = {
   jwt: {
     secret: process.env.JWT_SECRET || '',
   },
+  oauth: {
+    google: {
+      id: process.env.OAUTH_GOOGLE_ID || '',
+      secret: process.env.OAUTH_GOOGLE_SECRET || '',
+    },
+    kakao: {
+      id: process.env.OAUTH_KAKAO_ID || '',
+    },
+    naver: {
+      id: process.env.OAUTH_NAVER_ID || '',
+      secret: process.env.OAUTH_NAVER_SECRET || '',
+    },
+    frontCallbackUrl: process.env.OAUTH_FRONT_CALLBACK_URL || '',
+  },
   sentry: {
     dsn: 'https://adc6e50d23834a4ebbb35fdaeab18383@o4504560440508416.ingest.sentry.io/4504560465805312',
   },

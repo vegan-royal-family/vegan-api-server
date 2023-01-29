@@ -1,4 +1,5 @@
 import { Resolver } from '@nestjs/graphql';
+
 import { CategoryService } from './category.service';
 
 @Resolver()

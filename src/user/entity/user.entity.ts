@@ -16,7 +16,7 @@ import { Gender, Role } from '../../common/enum';
 import { Like } from '../../like/entity/like.entity';
 import { Recipe } from '../../recipe/entity';
 import { Review } from '../../review/entity/review.entity';
-import { Social } from '../../social/entity/social.entity';
+import { Social } from '../../social/entity';
 import { VeganType } from '../../vegan-type/entity';
 import { Visit } from '../../visit/entity/visit.entity';
 import { VeganLevel } from '../enum';
@@ -35,21 +35,21 @@ export class User {
   @Column({ length: 255, select: false })
   password: string;
 
-  @Field({ description: '닉네임' })
-  @Column({ length: 20 })
-  nickname: string;
+  @Field({ description: '닉네임', nullable: true })
+  @Column({ length: 20, nullable: true })
+  nickname?: string;
 
   @Field(() => Role, { description: '역할' })
   @Column({ type: 'enum', default: Role.USER, enum: Role })
   role: Role;
 
-  @Field(() => Gender, { description: '성별' })
-  @Column({ type: 'enum', enum: Gender })
-  gender: Gender;
+  @Field(() => Gender, { description: '성별', nullable: true })
+  @Column({ type: 'enum', enum: Gender, nullable: true })
+  gender?: Gender;
 
-  @Field({ description: '생년월일' })
-  @Column({ length: 8 })
-  birth: string;
+  @Field({ description: '생년월일', nullable: true })
+  @Column({ length: 8, nullable: true })
+  birth?: string;
 
   @Field(() => GraphQLJSON, { description: '비건 실천 이유' })
   @Column({ type: 'json' })

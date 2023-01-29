@@ -6,4 +6,4 @@ import { VeganTypeService } from './vegan-type.service';
 @Module({
   providers: [VeganTypeResolver, VeganTypeService],
 })
-export class VeganTypeModule { }
+export class VeganTypeModule {}

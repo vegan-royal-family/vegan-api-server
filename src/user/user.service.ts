@@ -22,7 +22,11 @@ export class UserService {
   }
 
   async addUser(args: IAddUser) {
-    const hashedPassword = await bcrypt.hash(args.password, saltCost);
-    return this.userRepository.addUser({ ...args, password: hashedPassword });
+    if (args.password) {
+      const hashedPassword = await bcrypt.hash(args.password, saltCost);
+      return this.userRepository.addUser({ ...args, password: hashedPassword });
+    }
+
+    return this.userRepository.addUser(args);
   }
 }

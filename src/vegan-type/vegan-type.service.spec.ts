@@ -1,4 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
+
 import { VeganTypeService } from './vegan-type.service';
 
 describe('VeganTypeService', () => {

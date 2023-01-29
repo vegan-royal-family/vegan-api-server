@@ -122,7 +122,7 @@ describe('AuthService', () => {
       };
 
       // when - then
-      await expect(service.login(loginArgs)).rejects.toThrow(Exceptions.invalidPasswordError);
+      await expect(service.login(loginArgs)).rejects.toThrow(Exceptions.invalidPassword);
       expect(userService.getUserForLogin).toBeCalledTimes(1);
       expect(userService.getUserForLogin).toBeCalledWith(loginArgs.email);
       expect(bcrypt.compare).toBeCalledTimes(1);
@@ -197,7 +197,7 @@ describe('AuthService', () => {
       };
 
       // when - then
-      await expect(service.signup(signupArgs)).rejects.toThrow(Exceptions.emailAlreadyExistsError);
+      await expect(service.signup(signupArgs)).rejects.toThrow(Exceptions.alreadyExistUserEmail);
       expect(userService.getUserByEmail).toBeCalledTimes(1);
       expect(userService.getUserByEmail).toBeCalledWith(signupArgs.email);
       expect(userService.addUser).not.toBeCalled();

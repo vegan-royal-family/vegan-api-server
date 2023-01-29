@@ -1,8 +1,5 @@
-import { InjectRedis } from '@liaoliaots/nestjs-redis';
 import { UnauthorizedException } from '@nestjs/common';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import { InjectSentry, SentryService } from '@ntegral/nestjs-sentry';
-import Redis from 'ioredis';
 
 import { RequestInfo, Roles } from '../common/decorator';
 import { Role } from '../common/enum';
@@ -12,11 +9,7 @@ import { LoginArgs, SignupArgs, SignupOutput, TokenOutput } from './dto';
 
 @Resolver()
 export class AuthResolver {
-  constructor(
-    private readonly authService: AuthService,
-    @InjectRedis() private readonly redis: Redis,
-    @InjectSentry() private readonly sentry: SentryService,
-  ) {}
+  constructor(private readonly authService: AuthService) {}
 
   @Mutation(() => TokenOutput)
   async login(@Args() loginArg: LoginArgs) {

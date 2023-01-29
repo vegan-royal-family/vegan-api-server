@@ -9,7 +9,7 @@
   "endOfLine": "lf",
   "overrides": [
     {
-      "files": ["error-messages.ts"],
+      "files": ["error-messages.ts", "exceptions.ts"],
       "options": {
         "printWidth": 1000
       }
