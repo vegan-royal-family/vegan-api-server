@@ -19,6 +19,13 @@ jobs:
         with:
           node-version: '14'
 
+      - name: Get verion
+        id: image
+        run: |
+          VERSION=$(echo ${{ github.sha }} | cut -c1-8)
+          echo VERSION=$VERSION
+          echo "::set-output name=version::$VERSION"
+
       - name: Cache node modules
         uses: actions/cache@v2
         with:
@@ -27,13 +34,6 @@ jobs:
           restore-keys: |
             ${{ runner.OS }}-build-
             ${{ runner.OS }}-
-
-      - name: Get verion
-        id: image
-        run: |
-          VERSION=$(echo ${{ github.sha }} | cut -c1-8)
-          echo VERSION=$VERSION
-          echo "::set-output name=version::$VERSION"
 
       - run: |
           yarn install --frozen-lockfile
