@@ -7,7 +7,6 @@ ENV TZ="Asia/Seoul"
 WORKDIR /var/www/html
 COPY . /var/www/html
 
-RUN yarn install --frozen-lockfile
 RUN yarn global add cross-env
 RUN yarn build
 
