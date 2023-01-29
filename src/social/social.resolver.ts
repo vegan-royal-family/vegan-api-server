@@ -1,6 +1,6 @@
 import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
 
-import { SocialCodeArgs, SocialLoginArgs, SocialLoginOutput } from './dto';
+import { SocialAccessTokenArgs, SocialCodeArgs, SocialLoginOutput } from './dto';
 import { SocialFactoryService } from './service/social-factory.service';
 
 @Resolver()
@@ -13,7 +13,7 @@ export class SocialResolver {
   }
 
   @Mutation(() => SocialLoginOutput)
-  async socialLogin(@Args() args: SocialLoginArgs) {
+  async socialLogin(@Args() args: SocialAccessTokenArgs) {
     return this.socialFactoryService.socialLogin(args);
   }
 }
