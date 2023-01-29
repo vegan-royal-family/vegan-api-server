@@ -8,7 +8,6 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 RUN yarn global add cross-env
-RUN yarn build
 
 ENV HOST 0.0.0.0
 EXPOSE 3200
