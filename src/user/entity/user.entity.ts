@@ -87,6 +87,10 @@ export class User {
   @Column('int', { unsigned: true, default: 0 })
   visitCount: number;
 
+  @Field()
+  @Column('boolean', { default: false })
+  isActive: boolean;
+
   @CreateDateColumn()
   createdAt: Date;
 

@@ -45,7 +45,7 @@ export class Review {
   content: string;
 
   @Field()
-  @Column('boolean', { name: 'IsPublic', comment: '공개 여부', default: true })
+  @Column('boolean', { comment: '공개 여부', default: true })
   isPublic: boolean;
 
   @CreateDateColumn()
