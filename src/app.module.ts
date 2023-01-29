@@ -12,7 +12,7 @@ import * as config from 'config';
 import { AppController } from './app.controller';
 import { AuthModule } from './auth/auth.module';
 import { CategoryModule } from './category/category.module';
-import { env, isProd } from './common/constant';
+import { env, isDev, isProd } from './common/constant';
 import { TypeORMExceptionFilter } from './common/filter/typeorm-exception.filter';
 import { FileModule } from './file/file.module';
 import { FoodModule } from './food/food.module';
@@ -21,6 +21,7 @@ import { MenuModule } from './menu/menu.module';
 import { RecipeModule } from './recipe/recipe.module';
 import { RestaurantModule } from './restaurant/restaurant.module';
 import { ReviewModule } from './review/review.module';
+import { SocialModule } from './social/social.module';
 import { UserModule } from './user/user.module';
 import { VeganTypeModule } from './vegan-type/vegan-type.module';
 import { VisitModule } from './visit/visit.module';
@@ -29,7 +30,7 @@ import { VisitModule } from './visit/visit.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     SentryModule.forRoot({
-      enabled: true, //isProd || isDev,
+      enabled: isProd || isDev,
       dsn: config.get('sentry.dsn'),
       debug: !isProd,
       environment: env,
@@ -77,6 +78,7 @@ import { VisitModule } from './visit/visit.module';
     ReviewModule,
     FileModule,
     VisitModule,
+    SocialModule,
   ],
   controllers: [AppController],
   providers: [

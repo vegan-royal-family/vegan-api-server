@@ -16,6 +16,7 @@ import { Gender, Role } from '../../common/enum';
 import { Like } from '../../like/entity/like.entity';
 import { Recipe } from '../../recipe/entity';
 import { Review } from '../../review/entity/review.entity';
+import { Social } from '../../social/entity/social.entity';
 import { VeganType } from '../../vegan-type/entity';
 import { Visit } from '../../visit/entity/visit.entity';
 import { VeganLevel } from '../enum';
@@ -106,6 +107,9 @@ export class User {
 
   @OneToMany(() => Recipe, (entity) => entity.user)
   recipes: Recipe[];
+
+  @OneToMany(() => Social, (entity) => entity.user)
+  socials: Social[];
 
   @ManyToOne(() => VeganType, (entity) => entity.users, { createForeignKeyConstraints: false })
   @JoinColumn({ name: 'veganTypeId' })
