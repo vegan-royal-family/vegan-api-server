@@ -13,8 +13,8 @@ export class UserService {
     return this.userRepository.getOneById(id);
   }
 
-  async getUserByEmail(username: string) {
-    return this.userRepository.getOneByUsername(username);
+  async getUserByEmail(email: string) {
+    return this.userRepository.getOneByEmail(email);
   }
 
   async getUserForLogin(email: string) {

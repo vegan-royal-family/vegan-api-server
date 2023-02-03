@@ -71,8 +71,8 @@ describe('UserService', () => {
       // then
       const user = userData()[0];
       expect(result).toEqual(user);
-      expect(userRepository.getOneByUsername).toBeCalledTimes(1);
-      expect(userRepository.getOneByUsername).toBeCalledWith(email);
+      expect(userRepository.getOneByEmail).toBeCalledTimes(1);
+      expect(userRepository.getOneByEmail).toBeCalledWith(email);
     });
   });
 });

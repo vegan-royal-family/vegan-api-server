@@ -9,8 +9,8 @@ export class UserRepository extends Repository<User> {
     return this.findOne(id);
   }
 
-  async getOneByUsername(username: string) {
-    return this.findOne({ username });
+  async getOneByEmail(email: string) {
+    return this.findOne({ email });
   }
 
   async getUserForLogin(

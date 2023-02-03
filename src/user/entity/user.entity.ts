@@ -28,9 +28,9 @@ export class User {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Field({ description: '아이디' })
+  @Field({ description: '이메일' })
   @Column({ length: 255 })
-  username: string;
+  email: string;
 
   @Column({ length: 255, select: false })
   password: string;

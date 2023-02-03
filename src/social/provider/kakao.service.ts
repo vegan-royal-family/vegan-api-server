@@ -5,7 +5,6 @@ import * as config from 'config';
 import { Agent } from 'https';
 
 import { Exceptions } from '../../common/exceptions';
-import { getGender } from '../../common/lib/util';
 import { OauthProvider } from '../enum';
 import {
   IAccessToken,
@@ -19,6 +18,7 @@ import {
 export class KakaoService implements ISocialProvider {
   private readonly axiosInstance: AxiosInstance;
   private readonly clientId = config.get<string>('oauth.kakao.id');
+  private readonly clientSecret = config.get<string>('oauth.kakao.secret');
   private readonly baseAuthUrl = 'https://kauth.kakao.com';
   private readonly baseApiUrl = 'https://kapi.kakao.com';
   private readonly accessTokenUrl = '/oauth/token';
@@ -42,6 +42,7 @@ export class KakaoService implements ISocialProvider {
           client_id: this.clientId,
           redirect_uri: callbackUrl,
           grant_type: 'authorization_code',
+          client_secret: this.clientSecret,
           code,
         },
       })
@@ -56,6 +57,7 @@ export class KakaoService implements ISocialProvider {
       .catch((err) => {
         const expectedErrorCodes = ['KOE320'];
         const kakaoErrorCode = err.response.data.error_code;
+        console.log(err);
 
         if (expectedErrorCodes.includes(kakaoErrorCode)) {
           throw Exceptions.socialError;
@@ -88,11 +90,7 @@ export class KakaoService implements ISocialProvider {
   }
 
   getSocialProfile(profile: IKakaoProfile): ISocialProfile {
-    return {
-      gender: getGender(profile.kakao_account.profile?.gender),
-      snsId: profile.id,
-      email: profile.kakao_account.email ?? '',
-    };
+    return { snsId: profile.id, email: profile.kakao_account?.email ?? '' };
   }
 
   async disconnect(socialAccessToken: string) {
