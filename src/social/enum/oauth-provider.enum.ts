@@ -1,8 +1,8 @@
 import { registerEnumType } from '@nestjs/graphql';
 
 export enum OauthProvider {
+  APPLE = 'apple',
   GOOGLE = 'google',
   KAKAO = 'kakao',
-  NAVER = 'naver',
 }
 registerEnumType(OauthProvider, { name: 'OauthProvider' });

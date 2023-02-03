@@ -17,7 +17,6 @@ import {
 import { IAddUserAndSocial } from '../interface/add-user-and-social.interface';
 import { GoogleService } from '../provider/google.service';
 import { KakaoService } from '../provider/kakao.service';
-import { NaverService } from '../provider/naver.service';
 import { SocialService } from './social.service';
 
 @Injectable()
@@ -28,7 +27,6 @@ export class SocialFactoryService {
     private readonly socialService: SocialService,
     private readonly kakaoService: KakaoService,
     private readonly googleService: GoogleService,
-    private readonly naverService: NaverService,
   ) {}
 
   private of(oauthProvider: OauthProvider): ISocialProvider {
@@ -37,8 +35,6 @@ export class SocialFactoryService {
         return this.kakaoService;
       case OauthProvider.GOOGLE:
         return this.googleService;
-      case OauthProvider.NAVER:
-        return this.naverService;
       default:
         throw new ForbiddenException();
     }

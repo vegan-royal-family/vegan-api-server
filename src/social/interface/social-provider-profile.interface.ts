@@ -1,3 +1,3 @@
-import { IGoogleProfile, IKakaoProfile, INaverProfile } from './providers';
+import { IGoogleProfile, IKakaoProfile } from './providers';
 
-export type ISocialProviderProfile = IGoogleProfile | IKakaoProfile | INaverProfile;
+export type ISocialProviderProfile = IGoogleProfile | IKakaoProfile;
