@@ -28,6 +28,7 @@ module.exports = {
     },
     kakao: {
       id: process.env.OAUTH_KAKAO_CLIENT_ID || '',
+      secret: process.env.OAUTH_KAKAO_CLIENT_SECRET || '',
     },
     callbackUrl: process.env.OAUTH_CALLBACK_URL || '',
   },
