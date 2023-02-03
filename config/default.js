@@ -29,7 +29,7 @@ module.exports = {
     kakao: {
       id: process.env.OAUTH_KAKAO_CLIENT_ID || '',
     },
-    frontCallbackUrl: process.env.OAUTH_FRONT_CALLBACK_URL || '',
+    callbackUrl: process.env.OAUTH_CALLBACK_URL || '',
   },
   sentry: {
     dsn: 'https://adc6e50d23834a4ebbb35fdaeab18383@o4504560440508416.ingest.sentry.io/4504560465805312',

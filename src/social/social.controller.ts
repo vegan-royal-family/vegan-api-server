@@ -13,11 +13,13 @@ export class SocialController {
     @Query('code') code: string,
     @Query('state') state: string,
   ): Promise<ISocialLoginResponse> {
+    console.log('요청은 들어오나?');
     const socialAccessToken = await this.socialFactoryService.getAccessTokenByCode({
       oauthProvider: OauthProvider.KAKAO,
       code,
       state,
     });
+    console.log(socialAccessToken);
 
     return this.socialFactoryService.socialLogin({
       oauthProvider: OauthProvider.KAKAO,
