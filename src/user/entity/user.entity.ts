@@ -32,8 +32,8 @@ export class User {
   @Column({ length: 255 })
   email: string;
 
-  @Column({ length: 255, select: false })
-  password: string;
+  @Column({ length: 255, nullable: true, select: false })
+  password?: string;
 
   @Field({ description: '닉네임', nullable: true })
   @Column({ length: 20, nullable: true })
@@ -51,21 +51,21 @@ export class User {
   @Column({ length: 8, nullable: true })
   birth?: string;
 
-  @Field(() => GraphQLJSON, { description: '비건 실천 이유' })
-  @Column({ type: 'json' })
-  veganFor: number[];
+  @Field(() => GraphQLJSON, { description: '비건 실천 이유', nullable: true })
+  @Column({ type: 'json', nullable: true })
+  veganFor?: number[];
 
-  @Field(() => VeganLevel, { description: '비건 실천 정도' })
-  @Column({ type: 'enum', enum: VeganLevel })
-  veganLevel: VeganLevel;
+  @Field(() => VeganLevel, { description: '비건 실천 정도', nullable: true })
+  @Column({ type: 'enum', enum: VeganLevel, nullable: true })
+  veganLevel?: VeganLevel;
 
-  @Field(() => Int, { description: '비건 타입 ID' })
-  @Column('bigint')
-  veganTypeId: number;
+  @Field(() => Int, { description: '비건 타입 ID', nullable: true })
+  @Column('bigint', { nullable: true })
+  veganTypeId?: number;
 
-  @Field(() => Int, { description: '프로필 파일 ID' })
-  @Column('bigint')
-  profileFileId: number;
+  @Field(() => Int, { description: '프로필 파일 ID', nullable: true })
+  @Column('bigint', { nullable: true })
+  profileFileId?: number;
 
   @Field(() => Int, { description: '신고 당한 횟수' })
   @Column('int', { unsigned: true, default: 0 })

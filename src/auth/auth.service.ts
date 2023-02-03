@@ -24,15 +24,17 @@ export class AuthService {
     return { accessToken, refreshToken };
   }
 
-  async login(loginArgs: LoginArgs) {
-    const user = await this.userService.getUserForLogin(loginArgs.email);
+  async login(args: LoginArgs) {
+    const user = await this.userService.getUserForLogin(args.email);
     if (!user) {
       throw Exceptions.userNotFoundError;
     }
 
-    const validateResult = await bcrypt.compare(loginArgs.password, user.password);
-    if (!validateResult) {
-      throw Exceptions.invalidPassword;
+    if (user.password) {
+      const validateResult = await bcrypt.compare(args.password, user.password);
+      if (!validateResult) {
+        throw Exceptions.invalidPassword;
+      }
     }
 
     return this.signJsonWebToken(user.id, user.role);
