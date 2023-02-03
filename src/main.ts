@@ -1,4 +1,4 @@
-import { Logger, RequestMethod, ValidationPipe } from '@nestjs/common';
+import { Logger, ValidationPipe } from '@nestjs/common';
 import { NestFactory, Reflector } from '@nestjs/core';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import * as config from 'config';
@@ -27,9 +27,6 @@ async function bootstrap() {
 
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.enable('trust proxy', true);
-  app.setGlobalPrefix('v2', {
-    exclude: [{ path: 'health', method: RequestMethod.GET }],
-  });
 
   app.use(express.json({ limit: '2MB' }));
   if (isProd) {

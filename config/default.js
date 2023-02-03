@@ -16,16 +16,18 @@ module.exports = {
     secret: process.env.JWT_SECRET || '',
   },
   oauth: {
+    apple: {
+      id: process.env.OAUTH_APPLE_ID || '',
+      teamId: process.env.OAUTH_APPLE_TEAM_ID || '',
+      keyId: process.env.OAUTH_APPLE_KEY_ID || '',
+      privateKeyString: process.env.OAUTH_APPLE_PRIVATE_KEY_STRING_ID || '',
+    },
     google: {
       id: process.env.OAUTH_GOOGLE_ID || '',
       secret: process.env.OAUTH_GOOGLE_SECRET || '',
     },
     kakao: {
-      id: process.env.OAUTH_KAKAO_ID || '',
-    },
-    naver: {
-      id: process.env.OAUTH_NAVER_ID || '',
-      secret: process.env.OAUTH_NAVER_SECRET || '',
+      id: process.env.OAUTH_KAKAO_CLIENT_ID || '',
     },
     frontCallbackUrl: process.env.OAUTH_FRONT_CALLBACK_URL || '',
   },

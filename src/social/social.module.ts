@@ -9,10 +9,12 @@ import { NaverService } from './provider/naver.service';
 import { SocialRepository } from './repository/social.repository';
 import { SocialFactoryService } from './service/social-factory.service';
 import { SocialService } from './service/social.service';
+import { SocialController } from './social.controller';
 import { SocialResolver } from './social.resolver';
 
 @Module({
   imports: [TypeOrmModule.forFeature([SocialRepository]), AuthModule, UserModule],
+  controllers: [SocialController],
   providers: [
     SocialResolver,
     SocialService,
