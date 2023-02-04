@@ -10,7 +10,7 @@ import {
 
 import { Recipe } from '../../recipe/entity';
 import { Restaurant } from '../../restaurant/entity';
-import { User } from '../../user/entity';
+import { Profile } from '../../user/entity/profile.entity';
 
 @ObjectType()
 @Entity()
@@ -32,8 +32,8 @@ export class VeganType {
   @OneToMany(() => Recipe, (entity) => entity.veganType)
   recipes: Recipe[];
 
-  @OneToMany(() => User, (entity) => entity.veganType)
-  users: User[];
+  @OneToMany(() => Profile, (entity) => entity.veganType)
+  profiles: Profile[];
 
   @OneToMany(() => Restaurant, (entity) => entity.veganType)
   restaurants: Restaurant[];

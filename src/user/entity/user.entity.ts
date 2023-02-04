@@ -1,25 +1,22 @@
 import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
-import GraphQLJSON from 'graphql-type-json';
 import {
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
-import { Gender, Role } from '../../common/enum';
+import { Role } from '../../common/enum';
 import { Like } from '../../like/entity/like.entity';
 import { Recipe } from '../../recipe/entity';
 import { Review } from '../../review/entity/review.entity';
 import { Social } from '../../social/entity';
-import { VeganType } from '../../vegan-type/entity';
 import { Visit } from '../../visit/entity/visit.entity';
-import { VeganLevel } from '../enum';
+import { Profile } from './profile.entity';
 
 @ObjectType()
 @Entity()
@@ -35,37 +32,9 @@ export class User {
   @Column({ length: 255, nullable: true, select: false })
   password?: string;
 
-  @Field({ description: '닉네임', nullable: true })
-  @Column({ length: 20, nullable: true })
-  nickname?: string;
-
   @Field(() => Role, { description: '역할' })
   @Column({ type: 'enum', default: Role.USER, enum: Role })
   role: Role;
-
-  @Field(() => Gender, { description: '성별', nullable: true })
-  @Column({ type: 'enum', enum: Gender, nullable: true })
-  gender?: Gender;
-
-  @Field({ description: '생년월일', nullable: true })
-  @Column({ length: 8, nullable: true })
-  birth?: string;
-
-  @Field(() => GraphQLJSON, { description: '비건 실천 이유', nullable: true })
-  @Column({ type: 'json', nullable: true })
-  veganFor?: number[];
-
-  @Field(() => VeganLevel, { description: '비건 실천 정도', nullable: true })
-  @Column({ type: 'enum', enum: VeganLevel, nullable: true })
-  veganLevel?: VeganLevel;
-
-  @Field(() => Int, { description: '비건 타입 ID', nullable: true })
-  @Column('bigint', { nullable: true })
-  veganTypeId?: number;
-
-  @Field(() => Int, { description: '프로필 파일 ID', nullable: true })
-  @Column('bigint', { nullable: true })
-  profileFileId?: number;
 
   @Field(() => Int, { description: '신고 당한 횟수' })
   @Column('int', { unsigned: true, default: 0 })
@@ -86,10 +55,6 @@ export class User {
   @Field(() => Int, { description: '방문 인증 횟수' })
   @Column('int', { unsigned: true, default: 0 })
   visitCount: number;
-
-  @Field()
-  @Column('boolean', { default: false })
-  isActive: boolean;
 
   @CreateDateColumn()
   createdAt: Date;
@@ -115,7 +80,6 @@ export class User {
   @OneToMany(() => Social, (entity) => entity.user)
   socials: Social[];
 
-  @ManyToOne(() => VeganType, (entity) => entity.users, { createForeignKeyConstraints: false })
-  @JoinColumn({ name: 'veganTypeId' })
-  veganType: VeganType;
+  @OneToOne(() => Profile, (entity) => entity.user)
+  profile: Profile;
 }
