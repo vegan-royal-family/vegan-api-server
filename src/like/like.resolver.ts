@@ -1,11 +1,9 @@
 import { Profile } from './../user/entity/profile.entity';
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { Role } from 'src/common/enum/role.enum';
-import { Review } from 'src/review/entity/review.entity';
 import { User } from 'src/user/entity';
 import { DoUndoLikeInput, DoUndoLikeOutput } from './dtos/doLike.dto';
 import { Like } from './entity/like.entity';
-
 import { LikeService } from './like.service';
 
 const USER: User = {
