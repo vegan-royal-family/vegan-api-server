@@ -17,4 +17,5 @@ export class ErrorMessages {
   static readonly socialErrorMessage = '로그인에 실패했습니다. 다시 시도해주세요.\n오류가 반복되면 고객센터에 문의해주세요.';
   static readonly tooShortPassword = '최소 글자 수를 채워주세요.';
   static readonly userNotFoundMessage = '회원 정보가 존재하지 않습니다.';
+  static readonly notFoundLiketarget = '좋아요 대상이 존재하지 않습니다.';
 }
