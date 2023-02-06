@@ -1,4 +1,4 @@
-import { Field, ID, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ID, InputType, Int, ObjectType } from '@nestjs/graphql';
 import {
   Column,
   CreateDateColumn,
@@ -11,6 +11,7 @@ import {
 import { User } from '../../user/entity';
 import { LikeTarget } from '../enum/like.enum';
 
+@InputType({ isAbstract: true })
 @ObjectType()
 @Entity()
 export class Like {
