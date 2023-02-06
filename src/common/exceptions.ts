@@ -16,5 +16,4 @@ export class Exceptions {
   static readonly loginFailureError = (currentCount: number) => new ForbiddenException(ErrorMessages.loginFailureMessage(currentCount));
   static readonly socialError = new InternalServerErrorException(ErrorMessages.socialErrorMessage);
   static readonly userNotFoundError = new NotFoundException(ErrorMessages.userNotFoundMessage);
-  static readonly notFoundLiketarget = new NotFoundException(ErrorMessages.notFoundLiketarget);
 }
