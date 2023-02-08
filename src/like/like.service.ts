@@ -6,7 +6,7 @@ import { Injectable } from '@nestjs/common';
 import { Transactional } from 'typeorm-transactional-cls-hooked';
 import { LikeTarget } from './enum/like.enum';
 import { Exceptions } from '../common/exceptions';
-import { User } from 'src/user/entity';
+import { User } from '../user/entity';
 
 @Injectable()
 export class LikeService {
