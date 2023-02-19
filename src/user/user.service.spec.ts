@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { userData } from '../../test/data/user.data.mock';
-import { MockUserRepository } from '../../test/repository/user.repository.mock';
-import { UserRepository } from './repository';
+import { userData } from '../../test/data';
+import { MockProfileRepository, MockUserRepository } from '../../test/repository';
+import { ProfileRepository, UserRepository } from './repository';
 import { UserService } from './user.service';
 
 describe('UserService', () => {
@@ -16,6 +16,10 @@ describe('UserService', () => {
         {
           provide: UserRepository,
           useValue: MockUserRepository(),
+        },
+        {
+          provide: ProfileRepository,
+          useValue: MockProfileRepository(),
         },
       ],
     }).compile();
