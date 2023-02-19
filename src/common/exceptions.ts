@@ -4,6 +4,7 @@ import { ErrorMessages } from './error-messages';
 
 export class Exceptions {
   static readonly alreadyExistUserEmail = new BadRequestException(ErrorMessages.alreadyExistUserEmail);
+  static readonly alreadyExistUserProfile = new BadRequestException(ErrorMessages.alreadyExistUserProfile);
   static readonly alreadyRegisteredSocialError = new ForbiddenException(ErrorMessages.alreadyRegisteredSocialMessage);
   static readonly cantFollowSelfError = new BadRequestException(ErrorMessages.cantFollowSelfMessage);
   static readonly cantLikeOwnReviewError = new BadRequestException(ErrorMessages.cantLikeOwnReview);

@@ -1,5 +1,6 @@
 export * from './access-token.interface';
 export * from './add-social.interface';
+export * from './add-user-and-social.interface';
 export * from './providers';
 export * from './social-access-token.interface';
 export * from './social-code.interface';

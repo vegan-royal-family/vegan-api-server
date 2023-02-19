@@ -5,10 +5,10 @@ import * as bcrypt from 'bcrypt';
 import { Role } from '../common/enum';
 import { Exceptions } from '../common/exceptions';
 import * as request from '../common/interface/request';
-import { IAddUser } from '../user/interface/add-user.interface';
+import { IAddUser } from '../user/interface';
 import { UserService } from '../user/user.service';
 import { LoginArgs, TokenOutput } from './dto';
-import { IJwtToken } from './interface/jwt-token.interface';
+import { IJwtToken } from './interface';
 
 @Injectable()
 export class AuthService {

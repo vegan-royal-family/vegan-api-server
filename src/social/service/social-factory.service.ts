@@ -7,6 +7,7 @@ import { UserService } from '../../user/user.service';
 import { socialCallbackUrl } from '../constant';
 import { LoginType, OauthProvider } from '../enum';
 import {
+  IAddUserAndSocial,
   ISocialAccessToken,
   ISocialCode,
   ISocialLoginResponse,
@@ -14,7 +15,6 @@ import {
   ISocialProvider,
   ISocialProviderProfile,
 } from '../interface';
-import { IAddUserAndSocial } from '../interface/add-user-and-social.interface';
 import { GoogleService } from '../provider/google.service';
 import { KakaoService } from '../provider/kakao.service';
 import { SocialService } from './social.service';

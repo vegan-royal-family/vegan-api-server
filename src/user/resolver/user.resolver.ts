@@ -1,12 +1,12 @@
 import { Args, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 
-import { RequestInfo, Roles } from '../common/decorator';
-import { IdIntArgs } from '../common/dto/id-int.args';
-import { Role } from '../common/enum';
-import { IRequest } from '../common/interface';
-import { Profile } from './entity';
-import { User } from './entity/user.entity';
-import { UserService } from './user.service';
+import { RequestInfo, Roles } from '../../common/decorator';
+import { IdIntArgs } from '../../common/dto/id-int.args';
+import { Role } from '../../common/enum';
+import { IRequest } from '../../common/interface';
+import { Profile } from '../entity';
+import { User } from '../entity/user.entity';
+import { UserService } from '../user.service';
 
 @Resolver(() => User)
 export class UserResolver {

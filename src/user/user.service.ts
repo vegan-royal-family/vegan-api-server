@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 
 import { saltCost } from '../auth/constant';
-import { IAddUser } from './interface/add-user.interface';
+import { Exceptions } from '../common/exceptions';
+import { IAddProfile, IAddUser } from './interface';
 import { UserRepository } from './repository';
 import { ProfileRepository } from './repository/profile.repository';
 
@@ -39,5 +40,14 @@ export class UserService {
     }
 
     return this.userRepository.addUser(args);
+  }
+
+  async addUserProfile(args: IAddProfile) {
+    const profile = await this.profileRepository.getOneByLoader(args.userId);
+    if (profile) {
+      throw Exceptions.alreadyExistUserProfile;
+    }
+
+    return this.profileRepository.addProfile(args);
   }
 }

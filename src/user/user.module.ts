@@ -3,7 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { UserRepository } from './repository';
 import { ProfileRepository } from './repository/profile.repository';
-import { UserResolver } from './user.resolver';
+import { UserResolver } from './resolver/user.resolver';
 import { UserService } from './user.service';
 
 @Module({
