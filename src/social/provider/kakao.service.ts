@@ -57,7 +57,6 @@ export class KakaoService implements ISocialProvider {
       .catch((err) => {
         const expectedErrorCodes = ['KOE320'];
         const kakaoErrorCode = err.response.data.error_code;
-        console.log(err);
 
         if (expectedErrorCodes.includes(kakaoErrorCode)) {
           throw Exceptions.socialError;
