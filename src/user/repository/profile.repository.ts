@@ -13,15 +13,11 @@ export class ProfileRepository extends Repository<Profile> {
     { cache: false },
   );
 
-  async getManyByLoader(userId: number) {
+  async getOneByLoader(userId: number) {
     return this.profileLoader.load(userId);
   }
 
   async getManyByUserIds(userIds: number[]) {
     return this.find({ userId: In(userIds) });
-  }
-
-  async getOneByUserId(userId: number) {
-    return this.findOne({ userId });
   }
 }

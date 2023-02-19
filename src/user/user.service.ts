@@ -29,7 +29,7 @@ export class UserService {
   }
 
   async getUserProfileById(id: number) {
-    return this.profileRepository.getOneByUserId(id);
+    return this.profileRepository.getOneByLoader(id);
   }
 
   async addUser(args: IAddUser) {
