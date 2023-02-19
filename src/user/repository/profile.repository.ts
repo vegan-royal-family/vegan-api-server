@@ -2,6 +2,7 @@ import * as DataLoader from 'dataloader';
 import { EntityRepository, In, Repository } from 'typeorm';
 
 import { Profile } from '../entity/profile.entity';
+import { IAddProfile } from '../interface';
 
 @EntityRepository(Profile)
 export class ProfileRepository extends Repository<Profile> {
@@ -19,5 +20,9 @@ export class ProfileRepository extends Repository<Profile> {
 
   async getManyByUserIds(userIds: number[]) {
     return this.find({ userId: In(userIds) });
+  }
+
+  async addProfile(args: IAddProfile) {
+    return this.save(args);
   }
 }

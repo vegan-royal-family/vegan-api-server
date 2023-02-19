@@ -1,5 +1,6 @@
 export class ErrorMessages {
   static readonly alreadyExistUserEmail = '이미 회원으로 등록된 이메일입니다.';
+  static readonly alreadyExistUserProfile = '이미 사용자 프로필이 존재합니다.';
   static readonly alreadyRegisteredSocialMessage = '이미 SNS로 가입되어 있습니다.\nSNS 간편 로그인을 시도해주세요.';
   static readonly cantFollowSelfMessage = '자기 자신을 팔로우할 수 없습니다.';
   static readonly cantLikeOwnReview = '자신의 리뷰에는 좋아요를 할 수 없습니다.';
